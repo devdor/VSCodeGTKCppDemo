@@ -1,30 +1,21 @@
-#include "appmainwnd.hpp"
+#include "appmainwnd.h"
 
-AppMainWnd::AppMainWnd() {
-    
-    this->set_title("Button demo");
+AppMainWnd::AppMainWnd(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refGlade)
+: Gtk::ApplicationWindow(cobject), m_refGlade(refGlade), m_pButton(nullptr) {
 
-    m_button.set_label("Click me");
+    set_title("GTKDemoApp");
+    set_size_request(500, 300);
 
-    // Sets the border width of the window.
-    set_border_width(10);
-
-    // When the button receives the "clicked" signal, it will call the
-    // on_button_clicked() method defined below.
-    m_button.signal_clicked().connect(sigc::mem_fun(*this,
-              &AppMainWnd::on_button_clicked));
-
-    // This packs the button into the Window (a container).
-    add(m_button);
-
-    // The final step is to display this newly created widget...
-    m_button.show();
+    //Get the Glade-instantiated Button, and connect a signal handler:
+    m_refGlade->get_widget("btn_quit", m_pButton);
+    if(m_pButton) {
+        m_pButton->signal_clicked().connect( sigc::mem_fun(*this, &AppMainWnd::on_button_quit) );
+        }
 }
 
-AppMainWnd::~AppMainWnd() {    
+AppMainWnd::~AppMainWnd() {
 }
 
-void AppMainWnd::on_button_clicked()
-{
-  std::cout << "Hello World" << std::endl;
+void AppMainWnd::on_button_quit() {
+  hide(); //hide() will cause Gtk::Application::run() to end.
 }

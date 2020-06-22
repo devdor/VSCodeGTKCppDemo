@@ -9,7 +9,7 @@
             "name": "gcc - Aktive Datei erstellen und debuggen",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/main.out",
+            "program": "${workspaceFolder}/app_main.out",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

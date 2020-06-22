@@ -6,16 +6,17 @@
             "label": "C/C++: gcc build active file",
             "command": "/usr/bin/g++",
             "args": [
-                "main.cpp",
+                "-g",
                 "appmainwnd.cpp",
+                "main.cpp",   
                 "-o",
-                "main.out",
+                "app_main.out",
                 "`pkg-config",
                 "--libs",
                 "--cflags",
                 "gtkmm-3.0`"
             ],
-            "problemMatcher": [],
+            "problemMatcher": ["$gcc"],
             "group": {
                 "kind": "build",
                 "isDefault": true
